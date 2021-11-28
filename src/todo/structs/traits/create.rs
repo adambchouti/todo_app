@@ -1,0 +1,10 @@
+use serde_json::{Map, Value, json};
+use crate::state::write_to_file;
+
+pub trait Create {
+    fn create(&self, title: &str, status: &String, state: &mut Map<String, Value>) {
+        state.insert(title.to_string(), json!(status));
+        write_to_file(&String::from("./state.json"), state);
+        println!("\n\n{} is being created\n\n", title);
+    }
+}
